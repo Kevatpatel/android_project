@@ -1,6 +1,8 @@
 package com.example.quickmeds;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -32,11 +34,23 @@ public class loginactivity extends AppCompatActivity {
              public void onClick(View view) {
                  String username = user.getText().toString();
                  String password = pass.getText().toString();
+                 Database db=new Database(getApplicationContext(),"healthcare",null,1);
                  if (username.length() == 0 || password.length() == 0) {
                      Toast.makeText(getApplicationContext(), "please fill all the details", Toast.LENGTH_SHORT).show();
                  }
                  else {
-                     Toast.makeText(getApplicationContext(), "login success", Toast.LENGTH_SHORT).show();
+                     if (db.login(username, password) == 1) {
+                         Toast.makeText(getApplicationContext(), "login success", Toast.LENGTH_SHORT).show();
+                         SharedPreferences sp=getSharedPreferences("sp_pref", Context.MODE_PRIVATE);
+                         SharedPreferences.Editor editor=sp.edit();
+                         editor.putString("username",username);
+                         editor.apply();
+                         startActivity(new Intent(loginactivity.this,Homeactivity.class));
+                     }
+                     else
+                     {
+                         Toast.makeText(getApplicationContext(),"Invalid username and password",Toast.LENGTH_SHORT).show();
+                     }
                  }
              }
          });

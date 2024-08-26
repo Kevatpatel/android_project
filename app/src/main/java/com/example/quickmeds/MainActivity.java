@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
                 String email=regemail.getText().toString();
                 String password=regpass.getText().toString();
                 String confirmpassword=regconfirmpass.getText().toString();
+                Database db=new Database(getApplicationContext(),"healthcare",null,1);
                if(username.length()==0 || email.length()==0|| password.length()==0||confirmpassword.length()==0)
                {
                    Toast.makeText(getApplicationContext(),"please fill all the details",Toast.LENGTH_SHORT).show();
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
                    {
                        if(isValid(password))
                        {
+                           db.register(username,email,password);
                            Toast.makeText(getApplicationContext(),"Registration successful",Toast.LENGTH_SHORT).show();
                            startActivity(new Intent(MainActivity.this,loginactivity.class));
                        }
