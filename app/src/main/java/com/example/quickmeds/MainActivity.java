@@ -22,12 +22,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
         reguser=findViewById(R.id.regname);
         regemail=findViewById(R.id.regemail);
         regpass=findViewById(R.id.regpass);
         regconfirmpass=findViewById(R.id.regconf);
+        tv = findViewById(R.id.textregister);
+        btn = findViewById(R.id.btn);
 
-        tv.setOnClickListener(new View.OnClickListener() {
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                String username=reguser.getText().toString();
@@ -58,7 +65,12 @@ public class MainActivity extends AppCompatActivity {
                }
             }
         });
-
+    tv.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            startActivity(new Intent(MainActivity.this , loginactivity.class));
+        }
+    });
     }
     public static boolean isValid(String passwordhere)
     {
