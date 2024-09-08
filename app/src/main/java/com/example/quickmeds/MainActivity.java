@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -27,12 +26,12 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        reguser=findViewById(R.id.regname);
-        regemail=findViewById(R.id.regemail);
-        regpass=findViewById(R.id.regpass);
-        regconfirmpass=findViewById(R.id.regconf);
+        reguser=findViewById(R.id.textviewappfullname);
+        regemail=findViewById(R.id.textviewappaddress);
+        regpass=findViewById(R.id.textviewappcontact);
+        regconfirmpass=findViewById(R.id.textviewappfees);
         tv = findViewById(R.id.textregister);
-        btn = findViewById(R.id.btn);
+        btn = findViewById(R.id.btnappbook);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
